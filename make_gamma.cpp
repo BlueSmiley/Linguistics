@@ -64,7 +64,20 @@ main(int argc, char **argv) {
   // the d-th data item
   // feel free to add additional helper functions to this file also
   // note that can definitely complete this *without* modifying any other files
+ for(unsigned int d=0; d < data.size(); d++) {
+    double prob_A_given_D = chce_probs[0];
+    double prob_B_given_D = chce_probs[1];
+    for(int i =0; i<2;i++){
+      for(int indice = 0;indice < data[d].ht_cnts[i]; indice++){
+        prob_A_given_D *= ht_probs[0][i];
+        prob_B_given_D *= ht_probs[1][i];
+      }
+      double sum = prob_A_given_D + prob_B_given_D;
+      gamma[d][0] = prob_A_given_D / sum;
+      gamma[d][1] = prob_B_given_D / sum;
 
+    }
+  }
   // END INSERT
   // show gamma
   for(int dn=0; dn < data.size(); dn++) {
